@@ -40,7 +40,7 @@ def get_mongo_connection():
 
 def get_concat_mongo_uri(database, mongo_uri):
     import re
-    match = re.match(r'(mongodb:\/\/[a-z:\._\-0-9]+\/?)(.*)', mongo_uri)
+    match = re.match(r'(mongodb:\/\/[a-z:\.,_\-0-9]+\/?)(.*)', mongo_uri)
     slash_database = '/' + database
     if match is None or len(match.groups()) > 2:
         raise ConnectionError("Invalid mongo uri connection %s" % mongo_uri)

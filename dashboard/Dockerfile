@@ -12,13 +12,13 @@ WORKDIR ${application_path}
 
 COPY . .
 
-RUN apt-get update && \
-    apt-get install -y nodejs npm
-RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    apt install -y nodejs
 RUN cd src/dashboard && \
-    npm install && \
+    npm install
+RUN cd src/dashboard && \
     ./node_modules/bower/bin/bower install --allow-root && \
     ./node_modules/gulp/bin/gulp.js
-RUN pip install --process-dependency-links .
+RUN python setup.py install --force
 EXPOSE ${PORT}
 ENTRYPOINT gunicorn -t 300 -w ${WORKER_INSTANCES} -b 0.0.0.0:${PORT} dashboard.app:app
