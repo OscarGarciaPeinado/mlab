@@ -56,12 +56,12 @@ pip install .
 ```
 ### Usage
 
-To run the server, please execute the following using mlab_dashboard_env.  
+To run the server, please execute the following using mlab_worker_env.  
 ```
 gunicorn -b 0.0.0.0:9090 -w 4 --config=python:worker.application.conf.gunicorn_conf worker.app:app
 ```
 
-Now we can open the dashboard, in the uri: http://localhost:5000/dashboard
+Now we can open the worker swagger, in the uri: http://localhost:9090
 
 ## Running with Docker
 
